@@ -29,27 +29,48 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // Se usa un operador ternario para asignar la clase de posición según el valor recibido.
-  // Se comprueba si socialMediaPosition es "position-left" o "position-right".
-  let socialMediaClass =
+  let displayName = `${variables.name ? variables.name : "Lucy"} ${
+    variables.lastName ? variables.lastName : "Boilett"
+  }`;
+
+  let socialMedia =
     variables.socialMediaPosition === "position-left"
       ? "position-left"
       : variables.socialMediaPosition === "position-right"
       ? "position-right"
-      : "position-right"; // valor por defecto
+      : "position-right";
+
+  let twitterLink =
+    variables.twitter && variables.twitter.trim() !== ""
+      ? variables.twitter
+      : "https://twitter.com/4geeksacademy";
+  let githubLink =
+    variables.github && variables.github.trim() !== ""
+      ? variables.github
+      : "https://github.com/4geeksacademy";
+  let linkedinLink =
+    variables.linkedin && variables.linkedin.trim() !== ""
+      ? variables.linkedin
+      : "https://linkedin.com/school/4geeksacademy";
+  let instagramLink =
+    variables.instagram && variables.instagram.trim() !== ""
+      ? variables.instagram
+      : "https://instagram.com/4geeksacademy";
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
                 ${cover}
               <img src="${variables.avatarURL}" class="photo" />
-              <h1>Lucy Boilett</h1>
-              <h2>Web Developer</h2>
-              <h3>Miami, USA</h3>
-              <ul class="${socialMediaClass}">
-                <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+              <h1>${displayName}</h1>
+              <h2>${variables.role ? variables.role : "Web Developer"}</h2>
+              <h3>${variables.city ? variables.city : "Miami"}, ${
+    variables.country ? variables.country : "USA"
+  }</h3>
+              <ul class="${socialMedia}">
+                <li><a href="${twitterLink}"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="${githubLink}"><i class="fab fa-github"></i></a></li>
+                <li><a href="${linkedinLink}"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="${instagramLink}"><i class="fab fa-instagram"></i></a></li>
               </ul>
             </div>
         `;
